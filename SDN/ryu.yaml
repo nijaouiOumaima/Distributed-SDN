@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ryu-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ryu
+  template:
+    metadata:
+      labels:
+        app: ryu
+    spec:
+      containers:
+      - name: ryu
+        image: osrg/ryu
+        command: ["ryu-manager"]
+        args: ["./ryu/ryu/app/simple_switch_13.py"]
+        ports:
+        - containerPort: 80
